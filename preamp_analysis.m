@@ -2,6 +2,10 @@
 clear
 close all;
 
+
+%TODO: Graph of all 3dB points with respect to Gain
+
+
 Vin = 0.0099;%input voltage, approx 10mV, constant for all measurements
 dataTable = readtable('preamp_data.xlsx'); %import the data
 
