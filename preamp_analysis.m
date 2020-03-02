@@ -41,12 +41,16 @@ for i = 1:numRows
         
         fig = figure();
         semilogx(frequencyArray(startIndex:i),VoutPPArraydB(startIndex:i));
-        title('TITLE');
+        title(['Pre-Amplifier Characteristics (Gain = ', num2str(gain), ')']);
         xlabel('Frequency (Hz');
         ylabel('Magnitude (dB)');
         hold on;
-        scatter(dBFreq,y);
+        scatter(frequencyArray(startIndex:i),VoutPPArraydB(startIndex:i), 'filled', 'b');
+        l = scatter(dBFreq,y, 'filled');
+        legend(l, '3dB point', 'Location', 'southwest');
         hold off;
         startIndex = i+1;
+        saveName = ['preAmp_Analysis_G', num2str(gain), '.png'];
+        saveas(fig, saveName);
     end
 end
