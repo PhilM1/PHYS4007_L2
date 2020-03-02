@@ -14,6 +14,9 @@ dataTable = readtable('preamp_data.xlsx'); %import the data
 frequencyArray = dataTable.Frequency_Hz_;
 VoutPPArraydB = 20*log10((abs(dataTable.VoutPP_top_ - dataTable.VoutPP_botom_))/Vin);
 
+dBArray = [];
+dbCount = 1;
+
 startIndex = 1;
 for i = 1:numRows
     gain = dataTable.Gain(i);
@@ -52,5 +55,19 @@ for i = 1:numRows
         startIndex = i+1;
         saveName = ['preAmp_Analysis_G', num2str(gain), '.png'];
         saveas(fig, saveName);
+        
+        dBArray(dbCount, 1) = dBFreq;
+        dBArray(dbCount, 2) = y;
+        dbCount = dbCount+1;
     end
 end
+
+fig = figure();
+semilogx(dBArray(:,1), dBArray(:,2));
+hold on;
+scatter(dBArray(:,1), dBArray(:,2), 'filled', 'b');
+title('Pre-Amplifier 3dB points vs Frequency');
+xlabel('Frequency (Hz');
+ylabel('Magnitude (dB)');
+grid on;
+saveas(fig, 'gainsPerFreq.png');
