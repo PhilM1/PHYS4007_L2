@@ -36,10 +36,6 @@ for i = 1:numRows
         x2 = frequencyArray(leftIndex+1);
         y = baseMag - 3;
         
-        
-        %y = baseMag - 3;
-        %m = (VoutPPArraydB(leftIndex)-VoutPPArraydB(leftIndex+1))/(frequencyArray(leftIndex+1)-frequencyArray(leftIndex));
-        %b = VoutPPArraydB(leftIndex);
         dBFreq = (y-y1)*(x2-x1)/(y2-y1) + x1;
         
         fig = figure();
